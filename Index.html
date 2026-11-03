@@ -1,1 +1,201 @@
 
+
+<!DOCTYPE html>
+<html lang="ta">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Nanba AI Studio</title>
+<style>
+*{box-sizing:border-box}
+body{
+ margin:0;
+ font-family:Arial,sans-serif;
+ background:#090d1c;
+ color:white;
+}
+header{
+ padding:22px 16px;
+ text-align:center;
+ background:linear-gradient(135deg,#5125bd,#087cc7);
+}
+header h1{margin:0;font-size:30px}
+header p{margin:9px 0 0}
+main{max-width:650px;margin:auto;padding:18px}
+.card{
+ background:#151d32;
+ border:1px solid #293653;
+ border-radius:16px;
+ padding:18px;
+ margin-bottom:16px;
+}
+h2{font-size:19px;margin-top:0;color:#8bcaff}
+label{display:block;margin:14px 0 7px}
+input,select,textarea{
+ width:100%;
+ padding:13px;
+ border:1px solid #405071;
+ border-radius:9px;
+ background:#0c1428;
+ color:white;
+ font-size:16px;
+}
+textarea{min-height:100px;resize:vertical}
+button{
+ border:0;
+ border-radius:10px;
+ padding:13px;
+ background:#7049ed;
+ color:white;
+ font-size:16px;
+ font-weight:bold;
+ width:100%;
+ margin-top:12px;
+ cursor:pointer;
+}
+button:active{opacity:.8}
+.secondary{background:#087eaa}
+#result{
+ white-space:pre-wrap;
+ line-height:1.6;
+ overflow-wrap:anywhere;
+}
+footer{text-align:center;color:#9baac7;padding:20px}
+</style>
+</head>
+<body>
+
+<header>
+ <h1>🤝 Nanba AI</h1>
+ <p>உங்கள் நண்பன் AI Studio</p>
+ <p>Stories • Video Prompts • Image Prompts</p>
+</header>
+
+<main>
+ <section class="card">
+  <h2>🎬 AI Video Prompt</h2>
+  <label>வீடியோ தலைப்பு</label>
+  <input id="topic" placeholder="உதாரணம்: பாட்டியின் அன்பு">
+
+  <label>வீடியோ வகை</label>
+  <select id="style">
+   <option>3D Cartoon Animation</option>
+   <option>Ghibli Inspired Animation</option>
+   <option>Cinematic Realistic</option>
+   <option>Village Animation</option>
+   <option>Fantasy Animation</option>
+  </select>
+
+  <label>காட்சிகளின் எண்ணிக்கை</label>
+  <select id="scenes">
+   <option>5 Scenes</option>
+   <option>6 Scenes</option>
+   <option>8 Scenes</option>
+   <option>10 Scenes</option>
+  </select>
+
+  <label>கதையின் விவரம்</label>
+  <textarea id="details" placeholder="உங்கள் கதையை இங்கே எழுதுங்கள்..."></textarea>
+
+  <button onclick="makeVideo()">✨ Video Prompt உருவாக்கு</button>
+ </section>
+
+ <section class="card">
+  <h2>📖 Tamil Story Generator</h2>
+  <input id="story" placeholder="கதையின் தலைப்பு">
+  <button class="secondary" onclick="makeStory()">கதை உருவாக்கு</button>
+ </section>
+
+ <section class="card">
+  <h2>🖼️ Image Prompt</h2>
+  <input id="imageTopic" placeholder="எப்படிப்பட்ட படம் வேண்டும்?">
+  <button class="secondary" onclick="makeImage()">Image Prompt உருவாக்கு</button>
+ </section>
+
+ <section class="card">
+  <h2>🎙️ Tamil Voice Script</h2>
+  <textarea id="voice" placeholder="Voice-over கதையை எழுதுங்கள்"></textarea>
+  <button class="secondary" onclick="makeVoice()">Voice Script உருவாக்கு</button>
+ </section>
+
+ <section class="card">
+  <h2>📋 உங்கள் Result</h2>
+  <div id="result">உங்கள் Prompt இங்கே வரும் நண்பா!</div>
+  <button onclick="copyResult()">📋 Copy</button>
+ </section>
+
+</main>
+
+<footer>
+ Made with ❤️ Nanba AI Studio
+</footer>
+
+<script>
+function show(text){
+ document.getElementById("result").textContent=text;
+}
+
+function makeVideo(){
+ let topic=document.getElementById("topic").value.trim();
+ let style=document.getElementById("style").value;
+ let scenes=document.getElementById("scenes").value;
+ let details=document.getElementById("details").value.trim();
+
+ if(!topic){alert("கதையின் தலைப்பை எழுதுங்கள் நண்பா!");return;}
+
+ show(
+ "Create a Tamil animated video.\n"+
+ "Title: "+topic+"\n"+
+ "Style: "+style+"\n"+
+ "Scenes: "+scenes+"\n"+
+ "Story: "+details+"\n"+
+ "Language: Tamil\n"+
+ "Include cinematic camera movements, consistent characters, expressive emotions, beautiful backgrounds and suitable Tamil dialogue.\n"+
+ "Maintain character appearance in every scene."
+ );
+}
+
+function makeStory(){
+ let title=document.getElementById("story").value.trim();
+ if(!title){alert("கதையின் தலைப்பை எழுதுங்கள்!");return;}
+ show("தமிழில் ஒரு சுவாரசியமான கதையை எழுதுங்கள்.\nதலைப்பு: "+title+
+ "\nதொடக்கம், உணர்ச்சிகரமான சம்பவங்கள், எதிர்பாராத திருப்பம் மற்றும் நல்ல முடிவுடன் கதையை உருவாக்குங்கள்.");
+}
+
+function makeImage(){
+ let topic=document.getElementById("imageTopic").value.trim();
+ if(!topic){alert("படத்தின் விவரத்தை எழுதுங்கள்!");return;}
+ show("Create a beautiful high quality cinematic image.\nSubject: "+topic+
+ "\nStyle: Premium 3D animation, detailed background, beautiful lighting, expressive characters, 16:9 composition.");
+}
+
+function makeVoice(){
+ let voice=document.getElementById("voice").value.trim();
+ if(!voice){alert("கதையை எழுதுங்கள்!");return;}
+ show("தமிழ் Voice Over Script:\n"+voice+
+ "\n\nVoice direction: Clear Tamil pronunciation, natural emotions and expressive storytelling.");
+}
+
+function copyResult(){
+ let text=document.getElementById("result").textContent;
+ if(!text){return;}
+ if(navigator.clipboard && window.isSecureContext){
+  navigator.clipboard.writeText(text)
+   .then(()=>alert("Copied நண்பா!"))
+   .catch(()=>fallbackCopy(text));
+ }else{fallbackCopy(text);}
+}
+
+function fallbackCopy(text){
+ let area=document.createElement("textarea");
+ area.value=text;
+ document.body.appendChild(area);
+ area.select();
+ document.execCommand("copy");
+ area.remove();
+ alert("Copied நண்பா!");
+}
+</script>
+
+</body>
+</html>
